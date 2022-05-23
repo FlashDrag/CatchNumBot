@@ -4,8 +4,8 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from config import TOKEN
 
 
-from data_base.sqlite_db import BotDB
-BotDB = BotDB('ugadaika.db')
+# from data_base.sqlite_db import BotDB
+# BotDB = BotDB('ugadaika.db')
 
 bot = Bot(token=TOKEN)
 storage = MemoryStorage()
