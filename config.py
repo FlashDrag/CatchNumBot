@@ -28,7 +28,7 @@ WEBAPP_PORT = getenv('PORT', default=8000)
 # порт, на котором работает наше приложение, так же считывается с переменных окружения,
 # которое предоставляет Heroku, его мы не заполняем.
 
-DB_URL = getenv('DATABASE_URL')
+DB_URL = getenv('HEROKU_POSTGRESQL_MAROON_URL')
 
 # https://github.com/aahnik/webhook-aiogram-heroku - example; 
 # https://habr.com/ru/post/655965/  - tutorial

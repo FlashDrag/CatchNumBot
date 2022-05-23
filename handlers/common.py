@@ -9,7 +9,7 @@ import logging
 # from operator import itemgetter 
 from loader import dp
 
-# from loader import BotDB
+from data_base.ps_db import BotDB
 
 
 async def process_main_menu(message: types.Message):
@@ -17,13 +17,13 @@ async def process_main_menu(message: types.Message):
 
 
 async def process_welcome(message: types.Message, state: FSMContext):
-    # user_id = message.from_user.id
-    # first_name = message.from_user.first_name
-    # last_name = message.from_user.last_name
-    # username = message.from_user.username
-    # if (not BotDB.user_exists(user_id)):
-    #     BotDB.add_user(user_id, first_name, last_name, username)
-    # rec = BotDB.get_user_name()
+    user_id = message.from_user.id
+    first_name = message.from_user.first_name
+    last_name = message.from_user.last_name
+    username = message.from_user.username
+    if (not BotDB.user_exists(user_id)):
+        BotDB.add_user(user_id, first_name, last_name, username)
+    rec = BotDB.get_user_name(user_id)
     # print(rec)
     # await state.update_data(user_name=message.from_user.first_name)
     # user_data = await state.get_data()
@@ -32,7 +32,7 @@ async def process_welcome(message: types.Message, state: FSMContext):
         users[user_data["user_name"]] = 0
         # устанавливаем лвл на ноль если игрока нету в списке
     '''
-    # await message.answer(f'Привіт {user_data["user_name"]} 👋🏻  Це ігра "Вгадайка"')
+    await message.answer(f'Привіт {rec} 👋🏻  Це ігра "Вгадайка"')
     await message.answer('Вгайдай-ка число, яке я загадав-ка🤔')
     await message.answer('Додаткова інфа в меню - Допомога або введи /help', reply_markup=main_menu_markup())
     question = f'🏹----------Розпочнемо⁉️----------🎯'

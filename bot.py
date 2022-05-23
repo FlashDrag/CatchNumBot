@@ -6,6 +6,7 @@ from loader import dp, bot
 from handlers.common import register_handlers_common
 from utils.number_process import register_handlers_num_process
 import config
+from data_base.ps_db import BotDB
 dic = {1:"🥇", 2: "🥈", 3: "🥉", 4: "4️⃣", 5: "5️⃣", 6: "6️⃣", 7: "останньої😓"}
 users = {}
 
@@ -22,7 +23,8 @@ async def on_startup(dp):
 
 async def on_shutdown(dp):
     await bot.delete_webhook()
-
+    BotDB.conn.close()
+    BotDB.cursor.close()
 
 # BotDB('ugadaika.db').setup()
 register_handlers_common(dp)
