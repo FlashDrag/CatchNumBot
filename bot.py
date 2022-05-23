@@ -1,13 +1,12 @@
 from aiogram.utils.executor import start_webhook
-import os
+from os import getenv
 import logging
 # from data_base.sqlite_db import BotDB
 from loader import dp, bot
 # from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from handlers.common import register_handlers_common
 from utils.number_process import register_handlers_num_process
-from  config import TOKEN
-
+import config
 dic = {1:"🥇", 2: "🥈", 3: "🥉", 4: "4️⃣", 5: "5️⃣", 6: "6️⃣", 7: "останньої😓"}
 users = {}
 
@@ -19,16 +18,16 @@ logger.setLevel(logging.DEBUG)
 
 # https://github.com/aahnik/webhook-aiogram-heroku - example; 
 # https://habr.com/ru/post/655965/  - tutorial
-HEROKU_APP_NAME = os.getenv('pavlibot')
+HEROKU_APP_NAME = config.HEROKU_APP_NAME
 
 # webhook settings
-WEBHOOK_HOST = 'https://pavlibot.herokuapp.com/'
-WEBHOOK_PATH = f'/webhook/{TOKEN}'
-WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
+WEBHOOK_HOST = config.WEBHOOK_HOST
+WEBHOOK_PATH = config.WEBHOOK_PATH
+WEBHOOK_URL = config.WEBHOOK_URL
 
 # webserver settings
 WEBAPP_HOST = '0.0.0.0'
-WEBAPP_PORT = os.getenv('PORT', default=8000)
+WEBAPP_PORT = getenv('PORT', default=8000)
 
 
 
