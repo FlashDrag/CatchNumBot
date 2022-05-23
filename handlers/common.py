@@ -9,7 +9,7 @@ import logging
 # from operator import itemgetter 
 from loader import dp
 
-from loader import BotDB
+# from loader import BotDB
 
 
 async def process_main_menu(message: types.Message):
