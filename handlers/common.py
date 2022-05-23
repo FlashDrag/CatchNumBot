@@ -20,9 +20,9 @@ async def process_welcome(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     first_name = message.from_user.first_name
     last_name = message.from_user.last_name
-    # username = message.from_user.username
-    # if (not BotDB.user_exists(user_id)):
-    BotDB.add_user(user_id, first_name, last_name)
+    username = message.from_user.username
+    if (not BotDB.user_exists(message.from_user.id)):
+        BotDB.add_user(user_id, first_name, last_name, username)
     rec = BotDB.get_user_name(user_id)
     # print(rec)
     # await state.update_data(user_name=message.from_user.first_name)

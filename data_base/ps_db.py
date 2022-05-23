@@ -16,13 +16,13 @@ class BotDB:
         return bool(len(result.fetchall()))
 
 
-    def add_user(self, user_id, first_name, last_name):
+    def add_user(self, user_id, first_name, last_name, username):
         """Добавляем юзера в базу"""
-        self.cursor.execute("INSERT INTO users VALUES(?,?,?,?,?)", (user_id, first_name, last_name))
+        self.cursor.execute("INSERT INTO users VALUES(?,?,?,?)", (user_id, first_name, last_name, username,))
         return self.conn.commit()
     
 
     def get_user_name(self, first_name):
         """Достаем id юзера в базе по его user_id"""
-        result = self.cursor.execute("SELECT `first_name` FROM `users` WHERE `user_id` = ?", (first_name))
+        result = self.cursor.execute("SELECT `first_name` FROM `users` WHERE `user_id` = ?", (first_name,))
         return result.fetchone()[0]
