@@ -16,9 +16,9 @@ class BotDB:
         return bool(len(result.fetchall()))
 
 
-    def add_user(self, user_id, first_name, last_name, username):
+    def add_user(self, user_id, first_name, last_name):
         """Добавляем юзера в базу"""
-        self.cursor.execute("INSERT INTO users VALUES(?,?,?,?,?)", (id, user_id, first_name, last_name, username))
+        self.cursor.execute("INSERT INTO users VALUES(?,?,?,?,?)", (user_id, first_name, last_name))
         return self.conn.commit()
     
 
