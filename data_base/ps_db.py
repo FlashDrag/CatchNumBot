@@ -12,13 +12,15 @@ class BotDB:
 
     def user_exists(self, user_id):
         """Проверяем, есть ли юзер в базе"""
-        result = self.cursor.execute("SELECT user_id FROM users WHERE user_id = ?", (user_id,))
+        result = self.cursor.execute("SELECT user_id FROM users WHERE user_id = {user_id}")
         return bool(len(result.fetchall()))
 
 
     def add_user(self, user_id, first_name, last_name, username):
         """Добавляем юзера в базу"""
-        self.cursor.execute("INSERT INTO users VALUES(?,?,?,?)", (user_id, first_name, last_name, username,))
+        self.cursor.execute("""
+        INSERT INTO users (user_id, first_name, last_name, username)
+        VALUES (%s,%s,%s,%s)""", (user_id, first_name, last_name, username))
         return self.conn.commit()
     
 
