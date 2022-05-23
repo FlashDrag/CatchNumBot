@@ -6,11 +6,5 @@ data_base/sqlite_db.py
 
 
 # Environments
-.venv
-*/.env
-env/
 venv/
-ENV/
-env.bak/
-venv.bak/
 
