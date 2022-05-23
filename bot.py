@@ -16,7 +16,7 @@ logger.setLevel(logging.DEBUG)
 
 
 async def on_startup(_):
-    await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
+    await bot.set_webhook(config.WEBHOOK_URL, drop_pending_updates=True)
     print("Бот успешно запущен")
 
 
