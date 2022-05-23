@@ -18,7 +18,7 @@ class BotDB:
 
     def add_user(self, user_id, first_name, last_name, username):
         """Добавляем юзера в базу"""
-        self.cursor.execute("INSERT INTO users VALUES(?,?,?,?)", (user_id, first_name, last_name, username))
+        self.cursor.execute("INSERT INTO users VALUES(?,?,?,?,?)", (id, user_id, first_name, last_name, username))
         return self.conn.commit()
     
 
