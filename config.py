@@ -2,6 +2,7 @@ from os import getenv
 
 TOKEN = '1493272442:AAFvOOO30FNIMxWNCCFGnwv6vVDGPKI2QmM'
 
+
 # https://github.com/aahnik/webhook-aiogram-heroku - example; 
 # https://habr.com/ru/post/655965/  - tutorial
 HEROKU_APP_NAME = getenv('pavlibot')
