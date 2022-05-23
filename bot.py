@@ -1,5 +1,4 @@
 from aiogram.utils.executor import start_webhook
-from os import getenv
 import logging
 # from data_base.sqlite_db import BotDB
 from loader import dp, bot
@@ -14,22 +13,6 @@ users = {}
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-
-
-
-# https://github.com/aahnik/webhook-aiogram-heroku - example; 
-# https://habr.com/ru/post/655965/  - tutorial
-HEROKU_APP_NAME = config.HEROKU_APP_NAME
-
-# webhook settings
-WEBHOOK_HOST = config.WEBHOOK_HOST
-WEBHOOK_PATH = config.WEBHOOK_PATH
-WEBHOOK_URL = config.WEBHOOK_URL
-
-# webserver settings
-WEBAPP_HOST = '0.0.0.0'
-WEBAPP_PORT = getenv('PORT', default=8000)
-
 
 
 async def on_startup(_):
@@ -48,13 +31,13 @@ register_handlers_num_process(dp)
 
 if __name__ == '__main__':
     start_webhook(
-        dp, 
+        dispatcher = dp, 
         skip_updates=True,
         on_startup=on_startup,
         on_shutdown=on_shutdown,
-        webhook_path=WEBHOOK_PATH,
-        host=WEBAPP_HOST,
-        port=WEBAPP_PORT,
+        webhook_path=config.WEBHOOK_PATH,
+        host=config.WEBAPP_HOST,
+        port=config.WEBAPP_PORT,
     )
 
 # BotFather

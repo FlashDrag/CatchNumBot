@@ -1,6 +1,5 @@
 __pycache__/
 # API keys
-config.py
 
 # database
 data_base/sqlite_db.py
