@@ -15,12 +15,12 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-async def on_startup(_):
+async def on_startup(dp):
     await bot.set_webhook(config.WEBHOOK_URL, drop_pending_updates=True)
     print("Бот успешно запущен")
 
 
-async def on_shutdown(dispatcher):
+async def on_shutdown(dp):
     await bot.delete_webhook()
 
 
