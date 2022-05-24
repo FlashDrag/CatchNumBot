@@ -12,7 +12,7 @@ class BotDB:
 
     def user_exists(self, user_id):
         """Проверяем, есть ли юзер в базе"""
-        result = self.cursor.execute("SELECT user_id FROM users WHERE user_id = {user_id}")
+        result = self.cursor.execute("SELECT user_id FROM users WHERE user_id = %s", (user_id,))
         return bool(len(result.fetchall()))
 
 
