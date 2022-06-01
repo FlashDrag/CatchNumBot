@@ -48,7 +48,7 @@ class BotDB:
         '''
 
     def add_column(self):
-        self.cursor.execute("ALTER TABLE users ADD COLUMN bug_text")
+        self.cursor.execute("ALTER TABLE users ADD COLUMN bug_text TEXT")
         self.conn.commit()
 
 # adding new user-----------------
