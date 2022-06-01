@@ -25,7 +25,7 @@ async def process_bug_message(message: types.Message, state: FSMContext):
         else:
             name = message.chat.username
         # сохраняем жалобу юзера в базу
-        db.get_bug_message(message)
+        db.set_bug_message(message)
         # сообщение админу со ссылкой на юзера (tg://user?id={user_id}) и кнопкой посмотреть сообщение с базы
         await bot.send_message(ad_id['Pasha'], f'Новое bug_сообщение от ▶️<a href="tg://user?id={user_id_bag_message}">{name}</a>◀️\n '
                                                 'Просмотреть?', reply_markup=admin_bug_inline_markup())

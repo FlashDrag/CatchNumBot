@@ -27,7 +27,7 @@ class BotDB:
         self.conn, self.cursor = conn, cursor
 
         cursor.execute("CREATE TABLE IF NOT EXISTS users(user_id BIGINT PRIMARY KEY, username TEXT, first_name TEXT, "
-                       "last_name TEXT, join_date TIMESTAMP)")
+                       "last_name TEXT, join_date TIMESTAMP, bug_text TEXT)")
 
         cursor.execute("CREATE TABLE IF NOT EXISTS game_stat(user_id BIGINT PRIMARY KEY, max_num INTEGER, win_count INTEGER, "
                        "win_count_for_stat INTEGER, max_num_for_stat INTEGER, game_over_count INTEGER, last_win_date TIMESTAMP, last_over_date TIMESTAMP)")
@@ -251,7 +251,7 @@ class BotDB:
  
 
 
-    def get_bug_message(self, message):
+    def set_bug_message(self, message):
         """Записываем bug_message от юзера с команды /bug в базу по user_id даного юзера"""
         user_id = message.from_user.id
         bug_text = message.text
