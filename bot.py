@@ -33,11 +33,13 @@ async def on_shutdown(dp):
     await dp.storage.close()
     await dp.storage.wait_closed()
 
+
 # Регистрация хэндлеров
 register_handlers_user_main(dp)
 register_handlers_num_process(dp)
 register_handlers_admin(dp)
 register_handlers_user_bug(dp)
+
 
 if __name__ == '__main__':
     start_webhook(
