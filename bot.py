@@ -25,14 +25,12 @@ async def on_startup(dp):
     logger.debug("Бот успешно запущен")
     await bot.send_message(config.ADMINS_ID['Pasha'], f'Bot successfully started!')
 
-
 async def on_shutdown(dp):
     await bot.delete_webhook()
     db.close_connect
     logger.error("БД отключена")
     await dp.storage.close()
     await dp.storage.wait_closed()
-
 
 # Регистрация хэндлеров
 register_handlers_user_main(dp)
