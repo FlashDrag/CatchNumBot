@@ -1,2 +1,2 @@
-from keyboards import inline_markup
-from keyboards import keyboard_markup
+from . import admin_markup
+from . import user_markup

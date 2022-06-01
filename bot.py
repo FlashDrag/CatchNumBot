@@ -1,34 +1,42 @@
 from aiogram.utils.executor import start_webhook
-import logging
-# from data_base.sqlite_db import BotDB
-from loader import dp, bot
-# from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from handlers.common import register_handlers_common
-from utils.number_process import register_handlers_num_process
 import config
-from data_base.ps_db import BotDB
-dic = {1:"🥇", 2: "🥈", 3: "🥉", 4: "4️⃣", 5: "5️⃣", 6: "6️⃣", 7: "останньої😓"}
-users = {}
+from loader import dp, db, bot
+from handlers.user.user_main import register_handlers_user_main
+from handlers.user.user_bug import register_handlers_user_bug
+from handlers.admin.admin import register_handlers_admin
+from utils.number_process import register_handlers_num_process
+from utils.commands import set_commands
+# import logging
+
+from loguru import logger
 
 # Включаем логирование, чтобы не пропустить важные сообщения
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format = "%(asctime)s/%(levelname)s/%(module)s/%(funcName)s: %(lineno)d - %(message)s",
+#     )
+# logger = logging.getLogger("bot")
+# logger.setLevel(logging.DEBUG)
 
 async def on_startup(dp):
     await bot.set_webhook(config.WEBHOOK_URL, drop_pending_updates=True)
-    print("Бот успешно запущен")
+    # Установка команд бота
+    await set_commands(bot)
+    logger.debug("Бот успешно запущен")
 
 
 async def on_shutdown(dp):
     await bot.delete_webhook()
-    BotDB.conn.close()
-    BotDB.cursor.close()
+    db.close_connect
+    logger.error("БД отключена")
+    await dp.storage.close()
+    await dp.storage.wait_closed()
 
-# BotDB('ugadaika.db').setup()
-register_handlers_common(dp)
+# Регистрация хэндлеров
+register_handlers_user_main(dp)
 register_handlers_num_process(dp)
+register_handlers_admin(dp)
+register_handlers_user_bug(dp)
 
 
 if __name__ == '__main__':
@@ -42,8 +50,9 @@ if __name__ == '__main__':
         port=config.WEBAPP_PORT,
     )
 
-# BotFather
-# start - Запуск Ігри 👊
-# progress - Мій рівень 💪
-# help - Допомога 🙏
-# cancel - Відміна 🖕
+"""
+from aiogram.utils import executor
+if __name__ == '__main__':
+    executor.start_polling(dp, on_startup=on_startup, skip_updates=True, on_shutdown=on_shutdown)
+"""
+
