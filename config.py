@@ -19,9 +19,9 @@ if not TOKEN:
     logger.critical(f'Failed to get the `TOKEN` variable from env')
     exit(-1)
 
-DB_URL = getenv('HEROKU_POSTGRESQL_MAROON_URL')
+DB_URL = getenv('DATABASE_URL')
 if not DB_URL:
-    logger.critical(f'Failed to get the `HEROKU_POSTGRESQL_MAROON_URL` variable from env')
+    logger.critical(f'Failed to get the `DATABASE_URL` variable from env')
     exit(-1)
 
 REDIS_URL = getenv('REDIS_TLS_URL')
