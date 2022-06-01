@@ -32,6 +32,7 @@ async def on_shutdown(dp):
     await dp.storage.close()
     await dp.storage.wait_closed()
 
+
 # Регистрация хэндлеров
 register_handlers_user_main(dp)
 register_handlers_num_process(dp)
