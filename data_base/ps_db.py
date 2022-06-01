@@ -47,10 +47,6 @@ class BotDB:
         return bool(self.cursor.fetchone())
         '''
 
-    def add_column(self):
-        self.cursor.execute("ALTER TABLE users ADD COLUMN bug_text TEXT")
-        self.conn.commit()
-
 # adding new user-----------------
     def add_usage(self, user_id: int) -> None:
         """
