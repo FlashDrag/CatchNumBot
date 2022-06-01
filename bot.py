@@ -39,7 +39,6 @@ register_handlers_num_process(dp)
 register_handlers_admin(dp)
 register_handlers_user_bug(dp)
 
-
 if __name__ == '__main__':
     start_webhook(
         dispatcher = dp, 
