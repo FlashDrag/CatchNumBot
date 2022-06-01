@@ -24,6 +24,7 @@ async def on_startup(dp):
     await set_commands(bot)
     logger.debug("Бот успешно запущен")
     await bot.send_message(config.ADMINS_ID['Pasha'], f'Bot successfully started!')
+    db.add_column()
 
 async def on_shutdown(dp):
     await bot.delete_webhook()
