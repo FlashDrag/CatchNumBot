@@ -23,6 +23,7 @@ async def on_startup(dp):
     # Установка команд бота
     await set_commands(bot)
     logger.debug("Бот успешно запущен")
+    await bot.send_message(config.ADMINS_ID['Pasha'], f'Bot successfully started!')
 
 
 async def on_shutdown(dp):

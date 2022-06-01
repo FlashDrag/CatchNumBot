@@ -1,11 +1,10 @@
-from unicodedata import name
 from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from utils.number_process import process_start_button
 from keyboards.user_markup.keyboard_markup import *
 from keyboards.user_markup.inline_markup import *
-from loader import bot, dp, db
+from loader import bot, db
 from aiogram.dispatcher.filters.builtin import Command
 
 from loguru import logger
