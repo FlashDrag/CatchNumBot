@@ -229,7 +229,10 @@ class BotDB:
         logger.debug(f'Юзер {message.from_user.first_name} запросил рейтинг:\n {rait_dict}')
         # формируем таблицу в prettytable для вывода юзеру в чат с сортировкой по лвл
         for i in rait_dict:
-            table.add_row([i, rait_dict[i]])
+            if rait_dict[i] == 0:
+                continue
+            else:
+                table.add_row([i, rait_dict[i]])
         table.sortby = "--Рівень--"     # сортировка таблицы по заголовку колонки 
         table.reversesort = True
         return(table)
