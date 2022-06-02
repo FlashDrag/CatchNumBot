@@ -5,7 +5,12 @@ from loader import dp, bot, db
 from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from states.states import Num
-from loguru import logger
+import logging
+import logging.config
+
+logging.config.fileConfig('logging/logging.config',
+                        disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 # from aiogram.utils.exceptions import MessageCantBeEdited
 # except MessageCantBeEdited as e:
@@ -24,7 +29,7 @@ async def process_start_button(message: types.Message,  state: FSMContext):
         data['attempt'] = ceil(log2(data['max_num']))
     # модуль math вычисляет минимальное к-ство попыток для угадывания нашего числа
     await Num.st_number.set()
-    logger.debug(data)
+    logger.info(f'start:{data}')
     text = f"〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n "\
             f"<b>Поїхали! Вгайдай число від 1️⃣ до {data['max_num']}</b>\n "\
             f"⚠️В тебе є {data['attempt']} спроб"
@@ -43,7 +48,7 @@ async def process_start_query(query: types.CallbackQuery, state: FSMContext):
         data['attempt'] = ceil(log2(data['max_num']))
     # модуль math вычисляет минимальное к-ство попыток для угадывания нашего числаа
     await Num.st_number.set()
-    logger.debug(data)
+    logger.info(f'start:{data}')
     # await query.message.edit_text()
     await query.answer(f"В тебе є {data['attempt']} спроб", show_alert=True)
     text = f"〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n "\
@@ -94,7 +99,7 @@ async def process_num(message: types.Message, state: FSMContext):
             max_num_for_stat = db.get_max_num_for_stat(user_id)
             # обновляем максимальное число юзера в основной БД, если последнее 'max_num' больше 'max_num_for_stat' которое в основной БД
             db.update_max_num_for_stat(user_id, max_num) if max_num > max_num_for_stat else None
-            logger.debug(data)
+            logger.info(f'finish:{data}')
 
             try:
                 await message.reply(f"Перемога🎯\n З {dic[data['user_attempt']]} - ї спроби  👏")

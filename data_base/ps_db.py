@@ -1,15 +1,13 @@
 import psycopg2 as ps
 from prettytable import PrettyTable, from_db_cursor
-# from aiogram import Bot
-# from config import TOKEN
-# bot = Bot(token=TOKEN)
 import datetime
 
-from loguru import logger
+import logging
+import logging.config
 
-# import logging
-# logger = logging.getLogger("__main__")
-
+logging.config.fileConfig('logging/logging.config',
+                        disable_existing_loggers=False)
+log = logging.getLogger("db")
 
 
 class BotDB:
@@ -18,10 +16,10 @@ class BotDB:
         Проверяет коннект к бд, ловит ошибки. Создает объекты бд и курсора. Создает, если еще не созданы таблицы бд
         """
         try:
-            logger.debug('Trying to connect to the database')
+            log.debug('Trying to connect to the database')
             conn = ps.connect((DB_URL), sslmode='require')
         except TypeError or ps.ProgrammingError:
-            logger.error('Failed connection to the database or incorrect URL')
+            log.error('Failed connection to the database or incorrect URL')
             return  
         cursor = conn.cursor()
         self.conn, self.cursor = conn, cursor
@@ -38,7 +36,7 @@ class BotDB:
 
         conn.commit()
 
-        logger.info('Successful connection to the database')
+        log.info('Successful connection to the database')
 
         '''
     def user_exists(self, user_id):
@@ -77,7 +75,7 @@ class BotDB:
             self.cursor.execute("INSERT INTO users (user_id, username, first_name, last_name , join_date) "
                             "VALUES (%s,%s,%s,%s,%s)", (user_id, username, first_name, last_name , datetime.datetime.now()))
             self.add_usage(user_id)
-            logger.info(f"The user: '{user_id} - {first_name}' has been added to DB")
+            log.info(f"The user: '{user_id} - {first_name}' has been added to DB")
         self.conn.commit()
 # adding new user-----------------
        
@@ -226,7 +224,7 @@ class BotDB:
                 if i[0] == j[0]:
                     rait_dict[i[1]] = j[1]
         # пример словаря на выходе: {'Pasha': 5, 'Ivan': 2}
-        logger.debug(f'Юзер {message.from_user.first_name} запросил рейтинг:\n {rait_dict}')
+        log.debug(f'Юзер {message.from_user.first_name} запросил рейтинг:\n {rait_dict}')
         # формируем таблицу в prettytable для вывода юзеру в чат с сортировкой по лвл
         for i in rait_dict:
             if rait_dict[i] == 0:
@@ -287,8 +285,8 @@ class BotDB:
     #         for date in dates:
     #             x.add_row(name, date)
 
-    #     logger.info(x)
-        # logger.info(date)
+    #     log.info(x)
+        # log.info(date)
         
 
         '''

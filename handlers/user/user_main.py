@@ -7,9 +7,12 @@ from keyboards.user_markup.inline_markup import *
 from loader import bot, db
 from aiogram.dispatcher.filters.builtin import Command
 
-from loguru import logger
+import logging
+import logging.config
 
-# import logging
+logging.config.fileConfig('logging/logging.config',
+                        disable_existing_loggers=False)
+log = logging.getLogger(__name__)
 
 
 async def process_main_menu(message: types.Message, state: FSMContext):
@@ -26,6 +29,7 @@ async def process_welcome(message: types.Message, command: Command.CommandObj, s
         # Запоминаем first_name и username юзера в FSM
     db.add_user(message)
     user_id = message.from_user.id
+    log.info(f'User {data["name"]} starting game!')
     db.update_welcome_count(user_id)  #счетчик
     # Добавляем юзера в основную базу
     if data["name"]:                         
@@ -54,7 +58,9 @@ async def process_cancel_command(message: types.Message, state: FSMContext):
     #     return
     # logging.info("Cancelling state %r", current_state)
     await state.reset_state(with_data=False)
-    await message.reply('Лади, коли надумаєш зіграти введи слово СТАРТ', reply_markup=main_start_menu_markup())
+    text = f"〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\n "\
+            f"<b>Лади, надумаєш зіграти просто введи слово СТАРТ ⬇️⏺</b> "
+    await message.reply(text, reply_markup=main_start_menu_markup())
 
 async def process_help_command(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
@@ -80,7 +86,7 @@ async def process_reset_command(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     db.update_reset_count(user_id)  #счетчик
     async with state.proxy() as data:
-        logger.debug(f"RESETING data: {data}")
+        log.debug(f"RESETING data: {data}")
     await state.finish()
     db.reset_values(user_id)
     await message.reply('Скидання успішне!', reply_markup=start_menu_markup())

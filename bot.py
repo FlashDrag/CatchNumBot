@@ -7,21 +7,12 @@ from handlers.admin.admin import register_handlers_admin
 from utils.number_process import register_handlers_num_process
 from utils.commands import set_commands
 
+import logging
+import logging.config
 
-from loguru import logger
-
-
-# Logging settings
-# import logging
-# file_log = logging.FileHandler('bot.log', mode='w')
-# console_out = logging.StreamHandler()
-# logging.basicConfig(
-#     level=logging.INFO, 
-#     handlers=(file_log, console_out),
-#     format = "%(asctime)s | %(levelname)s | %(module)s | %(funcName)s: %(lineno)d - %(message)s",
-#     )
-# logger = logging.getLogger(__name__)
-# logger.setLevel(logging.DEBUG)
+logging.config.fileConfig('logging/logging.config',
+                        disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 
 async def on_startup(dp):
@@ -34,9 +25,9 @@ async def on_startup(dp):
 async def on_shutdown(dp):
     # await bot.delete_webhook()
     db.close_connect
-    # logger.error("БД отключена")
     await dp.storage.close()
     await dp.storage.wait_closed()
+    logger.error("DB and stogare closed")
 
 
 # Регистрация хэндлеров
