@@ -8,8 +8,8 @@ import datetime
 from loguru import logger
 
 # import logging
+# logger = logging.getLogger("__main__")
 
-# logger = logging.getLogger("bot.ps_db")
 
 
 class BotDB:

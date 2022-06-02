@@ -8,9 +8,9 @@ from loader import bot, db
 from aiogram.dispatcher.filters.builtin import Command
 
 from loguru import logger
+
 # import logging
 
-# logger = logging.getLogger("bot.user_main")
 
 async def process_main_menu(message: types.Message, state: FSMContext):
     await state.reset_state(with_data=False)
