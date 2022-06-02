@@ -2,7 +2,6 @@ from os import getenv
 
 from loguru import logger
 
-
 '''
 TOKEN = '1493272442:AAFvOOO30FNIMxWNCCFGnwv6vVDGPKI2QmM'
 DB_URL = 'postgres://brcogyalzqsmgd:60830c517fe2a7e5dd5a0580ede9248bea915a4a46adc4f058a08a907d149411@ec2-63-34-180-86.eu-west-1.compute.amazonaws.com:5432/dbcfdffpk71b19'
