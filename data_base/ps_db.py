@@ -5,7 +5,7 @@ import datetime
 import logging
 import logging.config
 
-logging.config.fileConfig('logging/logging.config',
+logging.config.fileConfig('logging/logging.conf',
                         disable_existing_loggers=False)
 log = logging.getLogger("db")
 
@@ -224,7 +224,7 @@ class BotDB:
                 if i[0] == j[0]:
                     rait_dict[i[1]] = j[1]
         # пример словаря на выходе: {'Pasha': 5, 'Ivan': 2}
-        log.debug(f'Юзер {message.from_user.first_name} запросил рейтинг:\n {rait_dict}')
+        log.info(f'Юзер {message.from_user.first_name} запросил рейтинг:\n {rait_dict}')
         # формируем таблицу в prettytable для вывода юзеру в чат с сортировкой по лвл
         for i in rait_dict:
             if rait_dict[i] == 0:

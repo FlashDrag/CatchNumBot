@@ -10,7 +10,7 @@ from aiogram.dispatcher.filters.builtin import Command
 import logging
 import logging.config
 
-logging.config.fileConfig('logging/logging.config',
+logging.config.fileConfig('logging/logging.conf',
                         disable_existing_loggers=False)
 log = logging.getLogger(__name__)
 

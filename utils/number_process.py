@@ -8,7 +8,7 @@ from states.states import Num
 import logging
 import logging.config
 
-logging.config.fileConfig('logging/logging.config',
+logging.config.fileConfig('logging/logging.conf',
                         disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
