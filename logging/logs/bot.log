@@ -1,1 +1,15 @@
 
+{"asctime": "2022-06-04 12:46:57,027", "name": "db", "levelname": "INFO", "message": "Successful connection to the database"}
+{"asctime": "2022-06-04 12:46:57,232", "name": "aiogram", "levelname": "INFO", "message": "Bot: PavliBot [@PavliBot]"}
+{"asctime": "2022-06-04 12:46:57,296", "name": "aiogram", "levelname": "WARNING", "message": "Updates were skipped successfully."}
+{"asctime": "2022-06-04 12:46:57,439", "name": "__main__", "levelname": "ERROR", "message": "DB and stogare closed"}
+{"asctime": "2022-06-04 12:46:57,440", "name": "aiogram", "levelname": "WARNING", "message": "Goodbye!"}
+{"asctime": "2022-06-04 12:47:44,494", "name": "db", "levelname": "INFO", "message": "Successful connection to the database"}
+{"asctime": "2022-06-04 12:47:44,660", "name": "aiogram", "levelname": "INFO", "message": "Bot: PavliBot [@PavliBot]"}
+{"asctime": "2022-06-04 12:47:44,851", "name": "aiogram", "levelname": "WARNING", "message": "Updates were skipped successfully."}
+{"asctime": "2022-06-04 12:47:45,018", "name": "__main__", "levelname": "ERROR", "message": "DB and stogare closed"}
+{"asctime": "2022-06-04 12:47:45,019", "name": "aiogram", "levelname": "WARNING", "message": "Goodbye!"}
+{"asctime": "2022-06-04 12:48:01,728", "name": "db", "levelname": "INFO", "message": "Successful connection to the database"}
+{"asctime": "2022-06-04 12:48:01,890", "name": "aiogram", "levelname": "INFO", "message": "Bot: PavliBot [@PavliBot]"}
+{"asctime": "2022-06-04 12:48:01,954", "name": "aiogram", "levelname": "WARNING", "message": "Updates were skipped successfully."}
+{"asctime": "2022-06-04 12:48:02,080", "name": "aiogram.dispatcher.dispatcher", "levelname": "INFO", "message": "Start polling."}

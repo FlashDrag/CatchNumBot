@@ -1,8 +1,7 @@
-from unicodedata import name
 from aiogram import Dispatcher, types
 from loader import bot, dp, db
 from keyboards.user_markup.inline_markup import start_inline_markup
-
+from filters import IsAdmin
 
 
 async def send_update(message: types.Message):
@@ -22,12 +21,13 @@ async def send_update(message: types.Message):
 #     await bot.send_message(message.from_user.id, f'<pre>{db.get_static()}</pre>', parse_mode=types.ParseMode.HTML)
     
 async def get_statistic(message: types.Message):
-    await message.answer(f'<pre>{db.get_stat()}</pre>', parse_mode=types.ParseMode.HTML)
+    await message.answer(f'админ хендлер')
+    # await message.answer(f'<pre>{db.get_stat()}</pre>', parse_mode=types.ParseMode.HTML)
 
 
 
 
 
 def register_handlers_admin(dp: Dispatcher):
-    dp.register_message_handler(send_update, commands="send", state="*")
-    dp.register_message_handler(get_statistic, commands="get", state="*")
+    dp.register_message_handler(send_update, IsAdmin(), commands="send", state="*")
+    dp.register_message_handler(get_statistic, IsAdmin(), commands="get", state="*")

@@ -17,7 +17,8 @@ REDIS_URL = 'rediss://:p5a87db47636f08b80eab2da5d1840e5d90c5a2fe188befa41b166f04
 # url = urlparse(DB_URL)
 # print(f'hostname: {url.hostname}\n port: {url.port}\n database: {url.path}\n username: {url.username}\n password: {url.password}')
 
-ADMINS_ID = {'Pasha': 1359618407}
+ADMINS_ID = [1359618407]
+# Pasha
 '''
 # переменные окружения
 TOKEN = getenv('TOKEN')

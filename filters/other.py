@@ -1,9 +1,10 @@
+'''
 from aiogram import types
 from aiogram.dispatcher.filters import BoundFilter
 
 import config
 
-'''
+
 class IsOwnerFilter(BoundFilter):
     """
     Custom filter "is_owner".
@@ -15,23 +16,12 @@ class IsOwnerFilter(BoundFilter):
 
     async def check(self, message: types.Message):
         return message.from_user.id == config.BOT_OWNER
-'''
-
-class IsAdminFilter(BoundFilter):
-    """
-    Проверяет, есть ли юзер в списке админов. Список админов в config.ADMINS_ID
-    """
-    key = "is_admin"
-
-    def __init__(self, is_admin: bool):
-        self.is_admin = is_admin
-
-    async def check(self, message: types.Message):
-        member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-        return member.is_chat_admin() == self.is_admin
 
 
-'''
+
+
+
+
 class MemberCanRestrictFilter(BoundFilter):
     """
     Filter that checks member ability for restricting

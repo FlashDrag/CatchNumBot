@@ -121,7 +121,7 @@ async def process_sos(message: types.Message):
     else:
         name = message.chat.username
     # ссылка на юзера tg://user?id={user_id}
-    await bot.send_message(ad_id['Pasha'], f'SOS от: <a href="tg://user?id={user_id}">{name}</a>')
+    await bot.send_message(ad_id[0], f'SOS от: <a href="tg://user?id={user_id}">{name}</a>')
     await message.reply(f'Админ свяжеться с тобой как только сможет. Спасибо!', reply_markup=start_menu_markup())
 
 def register_handlers_user_main(dp: Dispatcher):
