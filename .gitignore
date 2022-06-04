@@ -1,8 +1,6 @@
 __pycache__/
 # API keys
 
-logging/logs/bot.log
-
 # database
 data_base/sqlite_db.py
 info.txt
@@ -10,3 +8,4 @@ info.txt
 # Environments
 venv/
 
+logging/logs/bot.log
