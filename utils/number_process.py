@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 # from aiogram.utils.exceptions import MessageCantBeEdited
 # except MessageCantBeEdited as e:
 
-dic = {1:"🥇", 2: "🥈", 3: "🥉", 4: "4️⃣", 5: "5️⃣", 6: "6️⃣", 7: "останньої😓"}
+dic = {1:"🥇", 2: "🥈", 3: "🥉", 4: "4️⃣", 5: "5️⃣", 6: "6️⃣", 7: "7️⃣", 8: "8️⃣", 9: "9️⃣", 10: "🔟"}
 
 async def process_start_button(message: types.Message,  state: FSMContext):
     user_id = message.from_user.id
