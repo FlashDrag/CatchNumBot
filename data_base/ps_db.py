@@ -117,6 +117,22 @@ class BotDB:
 
 
 # update_usage---------------------
+    # decorator
+    def update_usage_decorator(self, func):
+        '''
+        Функция считает использования юзером декорироваемого хендлера и сохраняет значения в БД 
+        '''
+        def wraper(*args, **kwargs):
+            """Обновляем данные в базе"""
+            res = func(*args, **kwargs)
+            user_id = args[0].from_user.id
+            counter_name = func.__name__.replace('process_', '') + '_count'
+            self.cursor.execute("UPDATE usage SET %s += 1 WHERE user_id = %s", (counter_name, user_id))
+            self.conn.commit()
+            return res
+        return wraper
+
+
     def update_welcome_count(self, user_id):
         """Обновляем данные в базе"""
         self.cursor.execute("UPDATE usage SET welcome_count = welcome_count + 1 WHERE user_id = %s", (user_id,))
@@ -159,7 +175,7 @@ class BotDB:
     
     def update_reset_count(self, user_id):
         """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET reset_coun = reset_coun + 1 WHERE user_id = %s", (user_id,))
+        self.cursor.execute("UPDATE usage SET reset_coun = reset_count + 1 WHERE user_id = %s", (user_id,))
         return self.conn.commit()
 
     def update_cancel_count(self, user_id):
