@@ -1,2 +1,1 @@
-from . import admin
-from . import callback_handlers
+from . import admin, callback_handlers

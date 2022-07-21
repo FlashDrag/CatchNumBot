@@ -1,2 +1,3 @@
-from . import admin_markup
-from . import user_markup
+from admin_markup import *
+from user_markup import *
+# from . import admin_markup, user_markup

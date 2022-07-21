@@ -1,2 +1,1 @@
-from . import inline_markup
-from . import keyboard_markup
+from . import inline_markup, keyboard_markup

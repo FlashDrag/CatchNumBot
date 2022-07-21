@@ -1,2 +1,1 @@
-from . import number_process
-from . import commands
+from . import number_process, commands, localization
