@@ -6,12 +6,12 @@ from handlers.user.user_bug import register_handlers_user_bug
 from handlers.admin.admin import register_handlers_admin
 from utils.number_process import register_handlers_num_process
 from utils.commands import set_commands
+from aiogram.utils import executor
 
 import logging
 import logging.config
 
-logging.config.fileConfig('logging/logging.conf',
-                        disable_existing_loggers=False)
+logging.config.fileConfig('logging/logging.conf', disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
 
@@ -21,6 +21,7 @@ async def on_startup(dp):
     await set_commands(bot)
     logger.debug("Бот успешно запущен")
     await bot.send_message(config.ADMINS_ID[0], f'Bot successfully started!')
+
 
 async def on_shutdown(dp):
     # await bot.delete_webhook()
@@ -39,7 +40,7 @@ register_handlers_user_bug(dp)
 """
 if __name__ == '__main__':
     start_webhook(
-        dispatcher = dp, 
+        dispatcher = dp,
         skip_updates=True,
         on_startup=on_startup,
         on_shutdown=on_shutdown,
@@ -49,8 +50,6 @@ if __name__ == '__main__':
     )
 
 """
-from aiogram.utils import executor
+
 if __name__ == '__main__':
     executor.start_polling(dp, on_startup=on_startup, skip_updates=True, on_shutdown=on_shutdown)
-
-
