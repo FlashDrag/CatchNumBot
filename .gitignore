@@ -8,4 +8,6 @@ info.txt
 # Environments
 venv/
 
+.env
+
 logging\logs\bot.log
