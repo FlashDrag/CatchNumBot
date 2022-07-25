@@ -32,7 +32,7 @@ async def process_welcome(message: types.Message, command: Command.CommandObj, s
     db.add_user(message)
     user_id = message.from_user.id
     log.info(f'User {data["name"]} starting game!')
-    # db.update_welcome_count(user_id)  #счетчик
+    # db.update_usage_counter(user_id, 'welcome')  # счетчик
     # Добавляем юзера в основную базу
     if data["name"]:
         name = data["name"]
@@ -55,7 +55,7 @@ async def process_start_command(state: FSMContext):
 @db.usage_counter
 async def process_cancel_command(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
-    # db.update_cancel_count(user_id)  # счетчик
+    # db.update_usage_counter(user_id, 'cancel')  # счетчик
     # Allow user to cancel any action
     # current_state = await state.get_state()
     # if current_state is None:
@@ -71,7 +71,7 @@ async def process_cancel_command(message: types.Message, state: FSMContext):
 @db.usage_counter
 async def process_help_command(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
-    # db.update_help_count(user_id)  #счетчик
+    # db.update_usage_counter(user_id, 'help')  # счетчик
     await bot.send_message(message.from_user.id, f"З допомою цього алгорифму ти ніколи не програєш 🤯\n "
                                                  "👉🏻Це математичний трюк, який називається\nбінарний пошук числа\n "
                                                  "Досі важко❓❓\n",
@@ -82,7 +82,7 @@ async def process_help_command(message: types.Message, state: FSMContext):
 @db.usage_counter
 async def process_info_command(message: types.Message):
     user_id = message.from_user.id
-    # db.update_info_count(user_id)  #счетчик
+    # db.update_usage_counter(user_id, 'info')  # счетчик
     await message.answer(f"<pre> "
                          "🔸Це 2-га бета версія ігри з рівнями.\n "
                          "🔸З кожним виграшом, рівень підвищується та збільшується діапазон цифр\n "
@@ -95,7 +95,7 @@ async def process_info_command(message: types.Message):
 @db.usage_counter
 async def process_reset_command(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
-    # db.update_reset_count(user_id)  # счетчик
+    # db.update_usage_counter(user_id, 'reset')  # счетчик
     async with state.proxy() as data:
         log.debug(f"RESETING data: {data}")
     await state.finish()
@@ -106,7 +106,7 @@ async def process_reset_command(message: types.Message, state: FSMContext):
 @db.usage_counter
 async def process_progress_command(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
-    # db.update_progress_count(user_id)  # счетчик
+    # db.update_usage_counter(user_id, 'progress')  # счетчик
     win_count = db.get_win_count(user_id)
     max_num = db.get_max_num(user_id)
     if win_count + 1 == 1:
@@ -121,9 +121,9 @@ async def process_progress_command(message: types.Message, state: FSMContext):
 @db.usage_counter
 async def process_rating(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
-    # db.update_rating_count(user_id)  # счетчик
-# async with state.proxy() as data:
-#     data[“111”] = message.text
+    # db.update_usage_counter(user_id, 'rating')  # счетчик
+    # async with state.proxy() as data:
+    # data[“111”] = message.text
     await bot.send_message(message.from_user.id, f'<pre>{db.get_rating(message)}</pre>',
                                                  reply_markup=start_menu_markup())
     await state.reset_state(with_data=False)

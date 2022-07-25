@@ -9,7 +9,7 @@ from keyboards.user_markup.keyboard_markup import sos_menu_markup, main_start_me
 @dp.callback_query_handler(text='niz')
 async def help_inline_markup_callback_handler(query: CallbackQuery, state: FSMContext):
     user_id = query.from_user.id
-    db.update_pidkazka_count(user_id)  # счетчик
+    db.update_usage_counter(user_id, 'pidkazka')  # счетчик
     answer_data = query.data
     await query.answer("Кожен раз ділимо на 2 діапазон, що залишився", show_alert=True)
     # always answer callback queries, even if you have nothing to say

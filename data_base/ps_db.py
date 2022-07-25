@@ -1,6 +1,7 @@
 import psycopg2 as ps
 from prettytable import PrettyTable, from_db_cursor
 import datetime
+from functools import wraps
 
 import logging
 import logging.config
@@ -138,62 +139,33 @@ class BotDB:
         '''
         Функция считает использования юзером декорироваемого хендлера и сохраняет значения в БД
         '''
+        @wraps(func)
         def wraper(*args, **kwargs):
-            """Обновляем данные в базе"""
-            res = func(*args, **kwargs)
-            user_id = args[0].from_user.id
+            result = func(*args, **kwargs)
+            user_id = args[0]['from']['id']
             counter_name = func.__name__.replace('process_', '').replace('_command', '') + '_count'
-            self.cursor.execute(f"UPDATE usage SET {counter_name} = {counter_name} + 1 WHERE user_id = ?", (user_id,))
+            self.cursor.execute(f"UPDATE usage SET {counter_name} = {counter_name} + 1 WHERE user_id= %s",
+                                (user_id,))
             self.conn.commit()
-            return res
+            return result
         return wraper
 
-    def update_welcome_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET welcome_count = welcome_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
+    def update_usage_counter(self, user_id: int, func: str):
+        '''
+        Cчитает использования юзером хендлера и сохраняет значения в БД
 
-    # not decorated yet
-    def update_start_game_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET start_game_count = start_game_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
+        :param int user_id: telegram id юзера
+        :param str func: название вызванного хендлера
+        '''
+        self.add_usage(user_id)  # Добавляет юзера в таблицу-счетчик, если он еще не добавлен
+        if func in {'welcome', 'start_game', 'info',
+                    'help', 'pidkazka', 'progress',
+                    'rating', 'reset', 'cancel'}:
+            counter_name = func + '_count'
+            self.cursor.execute(f"UPDATE usage SET {counter_name} = {counter_name} + 1 WHERE user_id = %s",
+                                (user_id,))
+            return self.conn.commit()
 
-    def update_info_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET info_count = info_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
-
-    def update_help_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET help_count = help_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
-
-    def update_progress_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET progress_count = progress_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
-
-    def update_rating_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET rating_count = rating_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
-
-    # not decorated yet
-    def update_pidkazka_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET pidkazka_count = pidkazka_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
-
-    def update_reset_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET reset_coun = reset_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
-
-    def update_cancel_count(self, user_id):
-        """Обновляем данные в базе"""
-        self.cursor.execute("UPDATE usage SET cancel_count = cancel_count + 1 WHERE user_id = %s", (user_id,))
-        return self.conn.commit()
 # update_usage---------------------
 
 # reset---------------------
