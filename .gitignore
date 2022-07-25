@@ -10,4 +10,7 @@ venv/
 
 .env
 
-logging\logs\bot.log
+test.py
+test_DB.py
+logging/logs/bot.log
+
