@@ -7,3 +7,5 @@ The rating of players, game  progress and some actions of each user, as well as 
 >
 The rest of the data is available only to the admin in the admin menu to which users have no access, since the command input is checked by the isadmin filter.
 > The bot is still under development. Next step is international localization.
+>
+> The current game language is ukrainian
