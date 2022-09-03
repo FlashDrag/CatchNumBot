@@ -31,7 +31,7 @@ async def process_welcome(message: types.Message, command: Command.CommandObj, s
         # Запоминаем first_name и username юзера в FSM
     db.add_user(message)
     user_id = message.from_user.id
-    log.info(f'User {data["name"]} starting game!')
+    log.info(f'User {data["name"]} <{user_id}> starting the game!')
     # db.update_usage_counter(user_id, 'welcome')  # счетчик
     # Добавляем юзера в основную базу
     if data["name"]:
@@ -89,7 +89,7 @@ async def process_info_command(message: types.Message):
                          "🔸Цю гру можливо  в̷и̷г̷р̷а̷т̷и̷  ✔️вигравати за мінімальну к-сть спроб.\n "
                          "🔸Кількість спроб є різною для кожного рівня\n "
                          "</pre>"
-                         "🟢Помітили баги? Є пропозиції? команда➡️ /bug ", reply_markup=start_menu_markup())
+                         "🟢Помітили баги? Є пропозиції? команда➡️ <b>/bug</b> ", reply_markup=start_menu_markup())
 
 
 @db.usage_counter
